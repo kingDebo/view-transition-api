@@ -1,0 +1,141 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 12px;
+}
+
+:root {
+  --background: #f9f9f9;
+  --bounce-ease: linear(
+    0,
+    0.004,
+    0.016,
+    0.035,
+    0.063,
+    0.098,
+    0.141 13.6%,
+    0.25,
+    0.391,
+    0.563,
+    0.765,
+    1,
+    0.891 40.9%,
+    0.848,
+    0.813,
+    0.785,
+    0.766,
+    0.754,
+    0.75,
+    0.754,
+    0.766,
+    0.785,
+    0.813,
+    0.848,
+    0.891 68.2%,
+    1 72.7%,
+    0.973,
+    0.953,
+    0.941,
+    0.938,
+    0.941,
+    0.953,
+    0.973,
+    1,
+    0.988,
+    0.984,
+    0.988,
+    1
+  );
+}
+
+body {
+  background-color: var(--background);
+  /* width: 100%;
+  min-height: 100vh; */
+}
+
+.card {
+  width: 200px;
+  height: 300px;
+  background-color: chocolate;
+  flex: 0 0 auto;
+  border-radius: 10px;
+  margin: 0 10px;
+}
+
+.card > div {
+  content: "-";
+  height: fit-content;
+  width: fit-content;
+  line-height: 0.4em;
+  display: inline-block;
+  background-color: var(--background);
+  border-bottom-right-radius: 10px;
+  font-size: 48px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#wrapper {
+  width: 100%;
+  min-height: 100vh;
+  padding: 48px;
+}
+
+#cards-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  /*background-color: aqua;*/
+}
+
+#add-btn {
+  position: relative;
+  padding: 1em 2em;
+  margin-bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+::view-transition-group {
+  animation: none;
+}
+
+.new-card {
+  view-transition-class: new-card;
+}
+
+.old-card {
+  view-transition-class: old-card;
+}
+
+.card:not(.new-card, .old-card) {
+  view-transition-class: card-list;
+}
+
+::view-transition-new(.new-card) {
+  animation: moveDown 800ms var(--bounce-ease);
+}
+
+::view-transition-group(.card-list) {
+  animation-duration: 800ms;
+  animation-timing-function: var(--bounce-ease);
+}
+
+@keyframes moveDown {
+  0% {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 100%;
+  }
+}
